@@ -58,12 +58,12 @@ a {
 html, body {
 	width:100%;
 	height: 100%;
-    background-color: #4D4D4D;
-
+	background-color:#5e5e5e;
 }
 #root{
-height: 100%;
-max-width:600px;
-margin:0 auto;
+	background-color: #4D4D4D;
+	height: 100%;
+	max-width:600px;
+	margin:0 auto;
 }
 `;

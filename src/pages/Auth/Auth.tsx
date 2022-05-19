@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Form from "./components/Form";
 import useAuth from "../../hooks/useAuth";
 import AuthTypes from "../../interfaces/AuthTypes";
-import Header from "../../components/Header";
 
 export default function AuthPage({ type }: AuthTypes) {
   const token = localStorage.getItem("token");
@@ -16,22 +15,33 @@ export default function AuthPage({ type }: AuthTypes) {
       navigate("/request");
     }
   }, [token, navigate, logIn]);
+
+  const texts = {
+    linkText:
+      type === "login"
+        ? "Não tem uma conta? Cadastre-se"
+        : "Já tem uma conta? Faça login",
+    linkTo: type === "login" ? "/cadastro" : "/",
+  };
+
   return (
     <Container>
-      <Header />
       <Form type={type} />
+      <Link to={texts.linkTo}>{texts.linkText}</Link>
     </Container>
   );
 }
 
 const Container = styled.main`
-  width: 80%;
-  height: 100%;
-  max-width: 464px;
-  padding: 64px 0;
+  padding: 0 16px;
   margin: 0px auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  a {
+    margin-top: 16px;
+    color: #f4ede8;
+    font-weight: bold;
+  }
 `;

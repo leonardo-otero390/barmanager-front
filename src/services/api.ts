@@ -2,7 +2,7 @@ import axios from "axios";
 import AuthValues from "../interfaces/AuthValues";
 
 export const instance = axios.create({
-  baseURL: "http://localhost:4000",
+  baseURL: "http://localhost:5000",
 });
 
 export const createAuthHeader = (token: string) => {
@@ -17,4 +17,4 @@ export const signUp = async (newUser: AuthValues) =>
   instance.post("/sign-up", newUser);
 
 export const login = async (loginUser: AuthValues) =>
-  instance.post("/login", loginUser);
+  instance.post("/log-in", loginUser);
