@@ -1,6 +1,7 @@
 import LogoutIcon from "@mui/icons-material/Logout";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 
 export default function Header() {
@@ -12,14 +13,20 @@ export default function Header() {
   }
   return (
     <Container>
-      <h1>
-        <strong>BARMANager</strong>
-      </h1>
+      <Link to="/">
+        <h1>
+          <strong>BARMANager</strong>
+        </h1>
+      </Link>
       {token ? (
         <button onClick={handlelogOut}>
           <LogoutIcon sx={{ fontSize: 32, color: "#fff" }} />
         </button>
-      ) : null}
+      ) : (
+        <button onClick={()=>navigate('/login')}>
+          <AccountBoxIcon sx={{ fontSize: 32, color: "#eba937" }} />
+        </button>
+      )}
     </Container>
   );
 }
@@ -41,5 +48,6 @@ const Container = styled.nav`
   button {
     border: none;
     background: none;
+    cursor: pointer;
   }
 `;

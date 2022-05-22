@@ -34,3 +34,12 @@ export const Button = styled.button`
   font-family: "Roboto", sans-serif;
   font-size: 24px;
 `;
+
+
+export const FormContainer = styled.form`
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+`;

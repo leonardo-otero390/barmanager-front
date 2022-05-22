@@ -23,3 +23,5 @@ export const signUp = async (newUser: AuthValues) =>
 
 export const login = async (loginUser: AuthValues) =>
   instance.post("/log-in", loginUser);
+
+export const getCocktails = async () => instance.get("/cocktails");

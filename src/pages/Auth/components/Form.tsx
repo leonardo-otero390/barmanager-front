@@ -1,12 +1,11 @@
 import AuthValues from "../../../interfaces/AuthValues";
-import styled from "styled-components";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as api from "../../../services/api";
 import AuthTypes from "../../../interfaces/AuthTypes";
 import useAuth from "../../../hooks/useAuth";
 import useAlert from "../../../hooks/useAlert";
-import { Button, Input } from "../../../styles/style";
+import { Button, Input,FormContainer as Container } from "../../../styles/style";
 
 interface ValuesState extends AuthValues {
   name: string;
@@ -61,7 +60,7 @@ export default function Form({ type }: AuthTypes) {
         .then((res) => {
           logIn(res.data.token);
           setMessage({ type: "success", text: "Login realizado com sucesso" });
-          navigate("/home");
+          navigate("/");
         })
         .catch((err) => {
           if (err.response.status === 401) alert("Email ou senha incorretos");
@@ -119,11 +118,3 @@ export default function Form({ type }: AuthTypes) {
     </Container>
   );
 }
-
-const Container = styled.form`
-  display: flex;
-  gap: 16px;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-`;

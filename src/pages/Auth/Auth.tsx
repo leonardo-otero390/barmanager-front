@@ -12,7 +12,7 @@ export default function AuthPage({ type }: AuthTypes) {
   useEffect(() => {
     if (token) {
       logIn(token);
-      navigate("/request");
+      navigate("/");
     }
   }, [token, navigate, logIn]);
 
@@ -21,7 +21,7 @@ export default function AuthPage({ type }: AuthTypes) {
       type === "login"
         ? "Não tem uma conta? Cadastre-se"
         : "Já tem uma conta? Faça login",
-    linkTo: type === "login" ? "/cadastro" : "/",
+    linkTo: type === "login" ? "/cadastro" : "/login",
   };
 
   return (
