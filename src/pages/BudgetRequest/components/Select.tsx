@@ -1,54 +1,44 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import useBudget from "../../../hooks/useBudget";
-import { BudgetValues } from "../../../interfaces/BudgetValues";
-import Cocktail from "../../../interfaces/Cocktail";
 
-interface Props {
-  stateKey: keyof BudgetValues;
+interface Option {
+  id: number;
+  name: string;
 }
 
-export default function Select({ stateKey: key }: Props) {
+interface Props {
+  handleSelection: (id: number) => void;
+  availableList: Option[];
+  selected: Option | null;
+  headerText: string;
+}
+
+export default function Select({
+  handleSelection,
+  availableList,
+  selected,
+  headerText,
+}: Props) {
   const [open, setOpen] = useState(false);
   const [empty, setEmpty] = useState(false);
-  const [selected, setSelected] = useState<Cocktail | null>(null);
-  const [availableList, setAvailableList] = useState<Cocktail[]>([]);
-  const { values, setValues, cocktails } = useBudget();
   useEffect(() => {
-    const cocktail = cocktails.find((c) => c.id === values[key]);
-    if (cocktail) setSelected(cocktail);
-    setAvailableList(
-      cocktails.filter(
-        (c) =>
-          c.id !== values.cocktail1 &&
-          c.id !== values.cocktail2 &&
-          c.id !== values.cocktail3 &&
-          c.id !== values.cocktail4
-      )
-    );
     setEmpty(!availableList.length && !selected);
-  }, [key, cocktails, values, availableList.length, selected]);
-
-  const handleSelection = (id: number) => {
-    setOpen(false);
-    setValues({ ...values, [key]: id });
-  };
+  }, [availableList.length, selected]);
 
   return (
     <Container>
-      <SelectHeader
-        onClick={() => setOpen(!open)}
-        empty={empty}
-      >
+      <SelectHeader onClick={() => setOpen(!open)} empty={empty}>
         {selected
           ? selected.name
           : empty
           ? "Sem opções disponíveis"
-          : "Escolha um drink"}
+          : headerText}
       </SelectHeader>
       <List open={open && !!availableList.length}>
         {availableList.map((item, index) => (
-          <li key={index} onClick={() => handleSelection(item.id)}>
+          <li key={index} onClick={() => {
+            setOpen(false);
+            handleSelection(item.id)}}>
             {item.name}
           </li>
         ))}

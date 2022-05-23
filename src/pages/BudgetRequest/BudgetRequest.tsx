@@ -5,7 +5,7 @@ import useAuth from "../../hooks/useAuth";
 import useAlert from "../../hooks/useAlert";
 import { Button, Input, FormContainer as Container } from "../../styles/style";
 import { BudgetValues } from "../../interfaces/BudgetValues";
-import Select from "./components/Select";
+import SelectCocktail from "./components/SelectCocktail";
 import useBudget from "../../hooks/useBudget";
 
 export default function BudgetRequest() {
@@ -72,10 +72,10 @@ export default function BudgetRequest() {
         type="number"
         onChange={handleChange("guests")}
       />
-      <Select stateKey={"cocktail1"} />
-      {values.cocktail1 ? <Select stateKey={"cocktail2"} /> : null}
-      {values.cocktail2 ? <Select stateKey={"cocktail3"} /> : null}
-      {values.cocktail3 ? <Select stateKey={"cocktail4"} /> : null}
+      <SelectCocktail stateKey={"cocktail1"} />
+      {values.cocktail1 ? <SelectCocktail stateKey={"cocktail2"} /> : null}
+      {values.cocktail2 ? <SelectCocktail stateKey={"cocktail3"} /> : null}
+      {values.cocktail3 ? <SelectCocktail stateKey={"cocktail4"} /> : null}
       <Button type="submit" disabled={loading}>
         {loading ? "Carregando" : "SOLICITAR ORÇAMENTO"}
       </Button>
