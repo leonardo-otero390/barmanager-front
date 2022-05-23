@@ -19,9 +19,9 @@ export const createAuthHeader = (token: string) => {
 };
 
 export const signUp = async (newUser: AuthValues) =>
-  instance.post("/sign-up", newUser);
+  instance.post("/signup", newUser);
 
 export const login = async (loginUser: AuthValues) =>
-  instance.post("/log-in", loginUser);
+  instance.post("/login", loginUser);
 
 export const getCocktails = async () => instance.get("/cocktails");
