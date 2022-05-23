@@ -4,18 +4,32 @@ import * as api from "../../services/api";
 import useAuth from "../../hooks/useAuth";
 import useAlert from "../../hooks/useAlert";
 import { Button, Input, FormContainer as Container } from "../../styles/style";
-import { BudgetValues } from "../../interfaces/BudgetValues";
+import {
+  BudgetRequest as Request,
+  BudgetValues,
+} from "../../interfaces/BudgetValues";
 import SelectCocktail from "./components/SelectCocktail";
 import useBudget from "../../hooks/useBudget";
+import SelectCategory from "./components/SelectCategory";
 
 export default function BudgetRequest() {
   const { token } = useAuth();
   const { setMessage } = useAlert();
   const [loading, setLoading] = useState(false);
-  const { values, setValues, setCocktails } = useBudget();
+  const { resetValues, values, setValues, setCocktails, setCategories } =
+    useBudget();
   const navigate = useNavigate();
 
   useEffect(() => {
+    api
+      .getEventCategories()
+      .then((res) => setCategories(res.data))
+      .catch((err) =>
+        setMessage({
+          type: "error",
+          text: "Houve um problema ao carregar os tipos de evento",
+        })
+      );
     api
       .getCocktails()
       .then((res) => setCocktails(res.data))
@@ -25,7 +39,7 @@ export default function BudgetRequest() {
           text: "Houve um problema ao carregar os drinks",
         })
       );
-  }, [setCocktails, setMessage]);
+  }, [setCategories, setCocktails, setMessage]);
 
   const handleChange =
     (prop: keyof BudgetValues) =>
@@ -36,6 +50,13 @@ export default function BudgetRequest() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
+    if (!values.categoryId) {
+      setMessage({
+        type: "error",
+        text: "Selecione o tipo de evento",
+      });
+      return setLoading(false);
+    }
     if (!values.cocktail1) {
       setMessage({
         type: "error",
@@ -51,21 +72,47 @@ export default function BudgetRequest() {
       navigate("/login");
       return setLoading(false);
     }
-    setMessage({
-      type: "error",
-      text: "Funcionalidade em desenvolvimento",
-    });
+
+    const bodyRequest: Request = {
+      categoryId: values.categoryId,
+      guests: Number(values.guests),
+      cocktails: [],
+    };
+
+    if (values.cocktail1) {
+      bodyRequest.cocktails.push(values.cocktail1);
+    }
+    if (values.cocktail2) {
+      bodyRequest.cocktails.push(values.cocktail2);
+    }
+    if (values.cocktail3) {
+      bodyRequest.cocktails.push(values.cocktail3);
+    }
+    if (values.cocktail4) {
+      bodyRequest.cocktails.push(values.cocktail4);
+    }
+
+    api
+      .requestBudget(bodyRequest, token)
+      .then(() => {
+        setMessage({
+          type: "success",
+          text: "Orçamento solicitado com sucesso entraremos em contato em breve",
+        });
+        resetValues();
+      })
+      .catch(() => {
+        setMessage({
+          type: "error",
+          text: "Houve um error ao solicitar o orçamento",
+        });
+      });
     setLoading(false);
   };
 
   return (
     <Container onSubmit={handleSubmit}>
-      <Input
-        placeholder="Tipo de evento"
-        required
-        type="text"
-        onChange={handleChange("categoryId")}
-      />
+      <SelectCategory />
       <Input
         placeholder="Quantidade de convidados"
         required

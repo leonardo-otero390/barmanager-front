@@ -28,7 +28,7 @@ export const login = async (loginUser: AuthValues) =>
 export const getCocktails = async () => instance.get("/cocktails");
 
 export const getEventCategories = async () =>
-  instance.get("/budget/categories");
+  instance.get("/budgets/categories");
 
 export const requestBudget = async (body: BudgetRequest, token: string) =>
   instance.post("/budgets", body, createAuthHeader(token));
