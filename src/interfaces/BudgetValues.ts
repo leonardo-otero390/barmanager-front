@@ -1,8 +1,12 @@
-export default interface BudgetValues {
-  eventCategory: string;
+export interface BudgetRequest {
+  categoryId: number;
   guests: number;
-  cocktail1Id: number;
-  cocktail2Id: number;
-  cocktail3Id: number;
-  cocktail4Id: number;
+  cocktails: number[];
+}
+
+export interface BudgetValues extends Omit<BudgetRequest, "cocktails"> {
+  cocktail1: number;
+  cocktail2: number;
+  cocktail3: number;
+  cocktail4: number;
 }

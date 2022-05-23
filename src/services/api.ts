@@ -1,5 +1,6 @@
 import axios from "axios";
 import AuthValues from "../interfaces/AuthValues";
+import { BudgetRequest } from "../interfaces/BudgetValues";
 
 const baseURL =
   process.env.REACT_APP_API_URL === "prod"
@@ -25,3 +26,9 @@ export const login = async (loginUser: AuthValues) =>
   instance.post("/login", loginUser);
 
 export const getCocktails = async () => instance.get("/cocktails");
+
+export const getEventCategories = async () =>
+  instance.get("/budget/categories");
+
+export const requestBudget = async (body: BudgetRequest, token: string) =>
+  instance.post("/budgets", body, createAuthHeader(token));

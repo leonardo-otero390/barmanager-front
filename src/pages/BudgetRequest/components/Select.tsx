@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import useBudget from "../../../hooks/useBudget";
-import BudgetValues from "../../../interfaces/BudgetValues";
+import { BudgetValues } from "../../../interfaces/BudgetValues";
 import Cocktail from "../../../interfaces/Cocktail";
 
 interface Props {
@@ -10,6 +10,7 @@ interface Props {
 
 export default function Select({ stateKey: key }: Props) {
   const [open, setOpen] = useState(false);
+  const [empty, setEmpty] = useState(false);
   const [selected, setSelected] = useState<Cocktail | null>(null);
   const [availableList, setAvailableList] = useState<Cocktail[]>([]);
   const { values, setValues, cocktails } = useBudget();
@@ -19,13 +20,14 @@ export default function Select({ stateKey: key }: Props) {
     setAvailableList(
       cocktails.filter(
         (c) =>
-          c.id !== values.cocktail1Id &&
-          c.id !== values.cocktail2Id &&
-          c.id !== values.cocktail3Id &&
-          c.id !== values.cocktail4Id
+          c.id !== values.cocktail1 &&
+          c.id !== values.cocktail2 &&
+          c.id !== values.cocktail3 &&
+          c.id !== values.cocktail4
       )
     );
-  }, [key, cocktails, values]);
+    setEmpty(!availableList.length && !selected);
+  }, [key, cocktails, values, availableList.length, selected]);
 
   const handleSelection = (id: number) => {
     setOpen(false);
@@ -34,8 +36,15 @@ export default function Select({ stateKey: key }: Props) {
 
   return (
     <Container>
-      <SelectHeader onClick={() => setOpen(!open)}>
-        {selected ? selected.name : "Escolha um drink"}
+      <SelectHeader
+        onClick={() => setOpen(!open)}
+        empty={empty}
+      >
+        {selected
+          ? selected.name
+          : empty
+          ? "Sem opções disponíveis"
+          : "Escolha um drink"}
       </SelectHeader>
       <List open={open && !!availableList.length}>
         {availableList.map((item, index) => (
@@ -52,13 +61,13 @@ const Container = styled.div`
   width: 100%;
 `;
 
-const SelectHeader = styled.div`
+const SelectHeader = styled.div<{ empty: boolean }>`
   font-size: 16px;
   display: flex;
   align-items: center;
   height: 72px;
   width: 100%;
-  background-color: #f5f5f5;
+  background-color: ${({ empty }) => (empty ? "grey" : "#f5f5f5")};
   border-radius: 10px;
   border: none;
   padding: 0 16px;
@@ -66,7 +75,7 @@ const SelectHeader = styled.div`
 
 const List = styled.ul<{ open: boolean }>`
   margin-top: -8px;
-  display: ${(props) => (props.open ? "block" : "none")};
+  display: ${({ open }) => (open ? "block" : "none")};
   li {
     font-size: 16px;
     display: flex;

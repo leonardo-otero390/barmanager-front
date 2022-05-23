@@ -4,7 +4,7 @@ import * as api from "../../services/api";
 import useAuth from "../../hooks/useAuth";
 import useAlert from "../../hooks/useAlert";
 import { Button, Input, FormContainer as Container } from "../../styles/style";
-import BudgetValues from "../../interfaces/BudgetValues";
+import { BudgetValues } from "../../interfaces/BudgetValues";
 import Select from "./components/Select";
 import useBudget from "../../hooks/useBudget";
 
@@ -36,14 +36,7 @@ export default function BudgetRequest() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
-    if (
-      !(
-        values.cocktail1Id +
-        values.cocktail2Id +
-        values.cocktail3Id +
-        values.cocktail4Id
-      )
-    ) {
+    if (!values.cocktail1) {
       setMessage({
         type: "error",
         text: "Escolha pelo menos um drink",
@@ -71,7 +64,7 @@ export default function BudgetRequest() {
         placeholder="Tipo de evento"
         required
         type="text"
-        onChange={handleChange("eventCategory")}
+        onChange={handleChange("categoryId")}
       />
       <Input
         placeholder="Quantidade de convidados"
@@ -79,10 +72,10 @@ export default function BudgetRequest() {
         type="number"
         onChange={handleChange("guests")}
       />
-      <Select stateKey={"cocktail1Id"} />
-      <Select stateKey={"cocktail2Id"} />
-      <Select stateKey={"cocktail3Id"} />
-      <Select stateKey={"cocktail4Id"} />
+      <Select stateKey={"cocktail1"} />
+      {values.cocktail1 ? <Select stateKey={"cocktail2"} /> : null}
+      {values.cocktail2 ? <Select stateKey={"cocktail3"} /> : null}
+      {values.cocktail3 ? <Select stateKey={"cocktail4"} /> : null}
       <Button type="submit" disabled={loading}>
         {loading ? "Carregando" : "SOLICITAR ORÇAMENTO"}
       </Button>

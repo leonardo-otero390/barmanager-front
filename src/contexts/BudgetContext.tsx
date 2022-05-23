@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import BudgetValues from "../interfaces/BudgetValues";
+import { BudgetValues } from "../interfaces/BudgetValues";
 import Cocktail from "../interfaces/Cocktail";
 
 interface IBudgetContext {
@@ -17,12 +17,12 @@ interface Props {
 
 export function BudgetProvider({ children }: Props) {
   const [values, setValues] = useState<BudgetValues>({
-    eventCategory: "",
+    categoryId: 0,
     guests: 0,
-    cocktail1Id: 0,
-    cocktail2Id: 0,
-    cocktail3Id: 0,
-    cocktail4Id: 0,
+    cocktail1: 0,
+    cocktail2: 0,
+    cocktail3: 0,
+    cocktail4: 0,
   });
   const [cocktails, setCocktails] = useState<Cocktail[]>([]);
 
