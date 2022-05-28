@@ -2,7 +2,7 @@
 
 BARMANager is a proposal generator based on the client's needs, with the information passed it calculates the expenses and sends it to the company's email.
 
-<img href="./demo-usage.gif" />
+<img src="./demo-usage.gif" />
 
 [Try it out now](http://barmanager-front.vercel.app/)
 
