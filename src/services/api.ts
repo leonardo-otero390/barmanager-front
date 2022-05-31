@@ -3,9 +3,9 @@ import AuthValues from "../interfaces/AuthValues";
 import { BudgetRequest } from "../interfaces/BudgetValues";
 
 const baseURL =
-  process.env.REACT_APP_API_URL === "prod"
-    ? "http://ec2-3-95-67-212.compute-1.amazonaws.com/"
-    : "http://localhost:5000";
+  process.env.REACT_APP_API_URL === "dev"
+    ? "http://localhost:5000"
+    : "http://ec2-3-95-67-212.compute-1.amazonaws.com/";
 
 export const instance = axios.create({
   baseURL,
