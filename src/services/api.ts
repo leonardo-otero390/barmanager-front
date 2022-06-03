@@ -5,7 +5,7 @@ import { BudgetRequest } from "../interfaces/BudgetValues";
 const baseURL =
   process.env.REACT_APP_API_URL === "dev"
     ? "http://localhost:5000"
-    : "http://ec2-3-95-67-212.compute-1.amazonaws.com/";
+    : "https://barmanager-bitt.herokuapp.com/";
 
 export const instance = axios.create({
   baseURL,
