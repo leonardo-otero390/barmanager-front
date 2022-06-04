@@ -27,7 +27,7 @@ export default function BudgetRequest() {
       .catch((err) =>
         setMessage({
           type: "error",
-          text: "Houve um problema ao carregar os tipos de evento",
+          text: "Error getting event categories",
         })
       );
     api
@@ -36,7 +36,7 @@ export default function BudgetRequest() {
       .catch((err) =>
         setMessage({
           type: "error",
-          text: "Houve um problema ao carregar os drinks",
+          text: "Error getting cocktails",
         })
       );
   }, [setCategories, setCocktails, setMessage]);
@@ -53,21 +53,21 @@ export default function BudgetRequest() {
     if (!values.categoryId) {
       setMessage({
         type: "error",
-        text: "Selecione o tipo de evento",
+        text: "Select a category",
       });
       return setLoading(false);
     }
     if (!values.cocktail1) {
       setMessage({
         type: "error",
-        text: "Escolha pelo menos um drink",
+        text: "Select a cocktail at least",
       });
       return setLoading(false);
     }
     if (!token) {
       setMessage({
         type: "error",
-        text: "Você precisa estar logado para solicitar um orçamento",
+        text: "You must be logged in to submit a request",
       });
       navigate("/login");
       return setLoading(false);
@@ -97,14 +97,14 @@ export default function BudgetRequest() {
       .then(() => {
         setMessage({
           type: "success",
-          text: "Orçamento solicitado com sucesso entraremos em contato em breve",
+          text: "Budget request successfully submitted, please wait we will contact you soon.",
         });
         resetValues();
       })
       .catch(() => {
         setMessage({
           type: "error",
-          text: "Houve um error ao solicitar o orçamento",
+          text: "Error submitting budget request",
         });
       });
     setLoading(false);
@@ -114,7 +114,7 @@ export default function BudgetRequest() {
     <Container onSubmit={handleSubmit}>
       <SelectCategory />
       <Input
-        placeholder="Quantidade de convidados"
+        placeholder="Guests quantity"
         required
         type="number"
         onChange={handleChange("guests")}
@@ -124,7 +124,7 @@ export default function BudgetRequest() {
       {values.cocktail2 ? <SelectCocktail stateKey={"cocktail3"} /> : null}
       {values.cocktail3 ? <SelectCocktail stateKey={"cocktail4"} /> : null}
       <Button type="submit" disabled={loading}>
-        {loading ? "Carregando" : "SOLICITAR ORÇAMENTO"}
+        {loading ? "Loading" : "REQUEST BUDGET"}
       </Button>
     </Container>
   );

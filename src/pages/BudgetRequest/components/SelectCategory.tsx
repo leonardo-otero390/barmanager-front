@@ -22,7 +22,7 @@ export default function SelectCategory() {
       handleSelection={handleSelection}
       availableList={availableList}
       selected={selected}
-      headerText="Tipo de evento"
+      headerText="Event category"
     />
   );
 }

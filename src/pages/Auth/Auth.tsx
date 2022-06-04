@@ -19,9 +19,9 @@ export default function AuthPage({ type }: AuthTypes) {
   const texts = {
     linkText:
       type === "login"
-        ? "Não tem uma conta? Cadastre-se"
-        : "Já tem uma conta? Faça login",
-    linkTo: type === "login" ? "/cadastro" : "/login",
+        ? "Don't have an account? sign up"
+        : "Have an account already? Log in",
+    linkTo: type === "login" ? "/signup" : "/login",
   };
 
   return (

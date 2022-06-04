@@ -35,7 +35,7 @@ export default function SelectCocktail({ stateKey: key }: Props) {
       handleSelection={handleSelection}
       availableList={availableList}
       selected={selected}
-      headerText="Escolha um drink"
+      headerText="Select a cocktail"
     />
   );
 }

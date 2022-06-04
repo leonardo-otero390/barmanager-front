@@ -31,7 +31,7 @@ export default function Select({
         {selected
           ? selected.name
           : empty
-          ? "Sem opções disponíveis"
+          ? "No available options"
           : headerText}
       </SelectHeader>
       <List open={open && !!availableList.length}>

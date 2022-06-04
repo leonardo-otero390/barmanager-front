@@ -13,7 +13,7 @@ function App() {
         <GlobalStyle />
         <Header />
         <Routes>
-          <Route path="/cadastro" element={<AuthPage type="signup" />} />
+          <Route path="/signup" element={<AuthPage type="signup" />} />
           <Route path="/login" element={<AuthPage type="login" />} />
           <Route path="/" element={<BudgetRequest />} />
         </Routes>

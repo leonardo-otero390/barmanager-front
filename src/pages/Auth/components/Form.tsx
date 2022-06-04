@@ -37,7 +37,7 @@ export default function Form({ type }: AuthTypes) {
     setLoading(true);
     if (type === "signup") {
       if (values.password !== values.confirmPassword) {
-        return alert("As senhas não coincidem.");
+        return alert("Passwords don't match.");
       }
       const { confirmPassword, ...body } = values;
       api
@@ -45,13 +45,13 @@ export default function Form({ type }: AuthTypes) {
         .then(() => {
           setMessage({
             type: "success",
-            text: "Cadastro realizado com sucesso",
+            text: "Successfully signed up. Please log in.",
           });
-          navigate("/");
+          navigate("/login");
         })
         .catch((err) => {
           if (err.response.status === 409)
-            return alert("Este email já está cadastrado.");
+            return alert("Email already in use.");
           alert(err.response.data);
         });
     } else {
@@ -59,11 +59,11 @@ export default function Form({ type }: AuthTypes) {
         .login({ email: values.email, password: values.password })
         .then((res) => {
           logIn(res.data.token);
-          setMessage({ type: "success", text: "Login realizado com sucesso" });
+          setMessage({ type: "success", text: "Login successfully" });
           navigate("/");
         })
         .catch((err) => {
-          if (err.response.status === 401) alert("Email ou senha incorretos");
+          if (err.response.status === 401) alert("Email or password is incorrect.");
         });
     }
     setLoading(false);
@@ -73,7 +73,7 @@ export default function Form({ type }: AuthTypes) {
     <Container onSubmit={handleSubmit}>
       {type === "signup" ? (
         <Input
-          placeholder="Nome"
+          placeholder="Name"
           required
           type="text"
           onChange={handleChange("name")}
@@ -89,14 +89,14 @@ export default function Form({ type }: AuthTypes) {
 
       {type === "signup" ? (
         <Input
-          placeholder="Telefone com DDD sem hífen"
+          placeholder="Telephone number no hyphen(optional)"
           type="number"
           onChange={handleChange("phone")}
         />
       ) : null}
 
       <Input
-        placeholder="Senha"
+        placeholder="Password"
         required
         type="password"
         onChange={handleChange("password")}
@@ -104,7 +104,7 @@ export default function Form({ type }: AuthTypes) {
       />
       {type === "signup" ? (
         <Input
-          placeholder="Confirmar senha"
+          placeholder="Confirm password"
           required
           type="password"
           onChange={handleChange("confirmPassword")}
@@ -113,7 +113,7 @@ export default function Form({ type }: AuthTypes) {
       ) : null}
 
       <Button type="submit" disabled={loading}>
-        {loading ? "Carregando" : type === "login" ? "ENTRAR" : "CADASTRAR"}
+        {loading ? "Loading" : type === "login" ? "LOGIN" : "SIGN UP"}
       </Button>
     </Container>
   );
