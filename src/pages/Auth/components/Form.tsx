@@ -5,7 +5,11 @@ import * as api from "../../../services/api";
 import AuthTypes from "../../../interfaces/AuthTypes";
 import useAuth from "../../../hooks/useAuth";
 import useAlert from "../../../hooks/useAlert";
-import { Button, Input,FormContainer as Container } from "../../../styles/style";
+import {
+  Button,
+  Input,
+  FormContainer as Container,
+} from "../../../styles/style";
 
 interface ValuesState extends AuthValues {
   name: string;
@@ -36,9 +40,12 @@ export default function Form({ type }: AuthTypes) {
     event.preventDefault();
     setLoading(true);
     if (type === "signup") {
-      if (values.password !== values.confirmPassword) {
+      if (values.password !== values.confirmPassword)
         return alert("Passwords don't match.");
-      }
+
+      if (values.phone.length && values.phone.length !== 11)
+        return alert("Phone number must be 11 digits.");
+
       const { confirmPassword, ...body } = values;
       api
         .signUp(body)
@@ -63,7 +70,8 @@ export default function Form({ type }: AuthTypes) {
           navigate("/");
         })
         .catch((err) => {
-          if (err.response.status === 401) alert("Email or password is incorrect.");
+          if (err.response.status === 401)
+            alert("Email or password is incorrect.");
         });
     }
     setLoading(false);
