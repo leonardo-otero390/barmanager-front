@@ -10,7 +10,21 @@ BARMANager is a proposal generator based on the client's needs, with the informa
 
 ## About
 
-This is an web application cocktail shop owners, with it they can answer customer proposes much way faster. Below are the implemented features:
+This project seems simple, but it's helpful if you work with events. Imagine it, John owns a bartender company that provides cocktails for parties such as birthdays or weddings, so his principal responsibilities are:
+- Train bartenders and other staff.
+- Buy ingredients for that event
+- Talk to customers, make budgets, and sign contracts
+- Allocate the exact number of staff for each event
+- Take care of taxes or any issue a general company has
+
+Luckily his company is famous in town, so he receives more than 50 budget requests per week. John is an old-fashioned guy and keeps all his recipes and expenses in a notebook because he thinks it's the safer way. The problem is he doesn't have time to calculate budgets and answer his customers in time, so he lost a lot of money.
+What problems does BARMANager solve?
+- John can save his recipes and customers' data. 
+- Can calculate budgets and answer customers much way faster.
+- Sign more contracts
+- Pay attention to the other responsibilities
+ 
+ Below are the implemented features:
 
 - Auth
 - Display to customer selection events categories and available cocktails
