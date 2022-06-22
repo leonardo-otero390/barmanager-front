@@ -40,12 +40,13 @@ export default function Form({ type }: AuthTypes) {
     event.preventDefault();
     setLoading(true);
     if (type === "signup") {
-      if (values.password !== values.confirmPassword)
-        return alert("Passwords don't match.");
+      if (values.password !== values.confirmPassword) {
+        setMessage({ type: "error", text: "Passwords don't match." });
+      }
 
-      if (values.phone.length && values.phone.length !== 11)
-        return alert("Phone number must be 11 digits.");
-
+      if (values.phone.length && values.phone.length !== 11) {
+        setMessage({ type: "error", text: "Phone number must be 11 digits." });
+      }
       const { confirmPassword, ...body } = values;
       api
         .signUp(body)
@@ -57,9 +58,14 @@ export default function Form({ type }: AuthTypes) {
           navigate("/login");
         })
         .catch((err) => {
-          if (err.response.status === 409)
-            return alert("Email already in use.");
-          alert(err.response.data);
+          if (err.response.status === 409) {
+            setMessage({ type: "error", text: "Email already in use." });
+          } else {
+            setMessage({
+              type: "error",
+              text: "An error occurred.Please try again.",
+            });
+          }
         });
     } else {
       api
@@ -70,8 +76,17 @@ export default function Form({ type }: AuthTypes) {
           navigate("/");
         })
         .catch((err) => {
-          if (err.response.status === 401)
-            alert("Email or password is incorrect.");
+          if (err.response.status === 401) {
+            setMessage({
+              type: "error",
+              text: "Email or password is incorret",
+            });
+          } else {
+            setMessage({
+              type: "error",
+              text: "An error occurred.Please try again.",
+            });
+          }
         });
     }
     setLoading(false);
