@@ -42,10 +42,12 @@ export default function Form({ type }: AuthTypes) {
     if (type === "signup") {
       if (values.password !== values.confirmPassword) {
         setMessage({ type: "error", text: "Passwords don't match." });
+        return setLoading(false);
       }
 
       if (values.phone.length && values.phone.length !== 11) {
-        setMessage({ type: "error", text: "Phone number must be 11 digits." });
+        setMessage({ type: "error", text: "Phone number must be 11 digits or empty." });
+        return setLoading(false);
       }
       const { confirmPassword, ...body } = values;
       api
