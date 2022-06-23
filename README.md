@@ -2,7 +2,37 @@
 
 BARMANager is a proposal generator based on the client's needs, with the information passed it calculates the expenses and sends it to the company's email.
 
-<img src="./demo-usage.gif" />
+<table>
+<tr>
+<th>Demo usage</th>
+<th>The output email</th>
+</tr>
+<tr>
+<td><img src="./demo-usage.gif" /></td>
+<td>
+<h4><strong>New Birthday budget request for 100 guests</strong></h4><hr>
+ <h6>Customer infos:</h6>
+  <p>
+    Name: John<br>
+    Email: john@mail.com<br>
+    Phone: 12345678911<br>
+</p><hr>
+ <h6><strong>Total suggested price: $ 2393,72</strong></h6><hr>
+  <div style="margin:16px;">
+    Costs:<br>
+      1 Bartender leader - $ 350,00<br>2 Bartender - $ 280,00<br>1 Installation - $ 60,00<br>
+   1 Transport - $ 50,00<br>3 Laundry - $ 30,00<br>3 Equipment depreciation - $ 30,00<br>1 Furniture - $ 160,00<br>
+      total: $ 960,00;<br>
+    <br>Cocktails:<br>
+      400 Caipirinha - $ 934,76<br>
+      total: $ 934,76;<br>
+    <br>Disposables:<br>
+      400 Straw - $ 80,00<br>400 Napkin - $ 20,00<br>
+      total: $ 100,00;<br>
+    </div>
+</div></td>
+</tr>
+</table>
 
 [Try it out now](http://barmanager-front.vercel.app/)
 
@@ -11,6 +41,7 @@ BARMANager is a proposal generator based on the client's needs, with the informa
 ## About
 
 This project seems simple, but it's helpful if you work with events. Imagine it, John owns a bartender company that provides cocktails for parties such as birthdays or weddings, so his principal responsibilities are:
+
 - Train bartenders and other staff.
 - Buy ingredients for that event
 - Talk to customers, make budgets, and sign contracts
@@ -19,12 +50,13 @@ This project seems simple, but it's helpful if you work with events. Imagine it,
 
 Luckily his company is famous in town, so he receives more than 50 budget requests per week. John is an old-fashioned guy and keeps all his recipes and expenses in a notebook because he thinks it's the safer way. The problem is he doesn't have time to calculate budgets and answer his customers in time, so he lost a lot of money.
 What problems does BARMANager solve?
-- John can save his recipes and customers' data. 
+
+- John can save his recipes and customers' data.
 - Can calculate budgets and answer customers much way faster.
 - Sign more contracts
 - Pay attention to the other responsibilities
- 
- Below are the implemented features:
+
+Below are the implemented features:
 
 - Auth
 - Display to customer selection events categories and available cocktails
